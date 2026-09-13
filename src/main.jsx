@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles.css'
 
@@ -30,7 +30,7 @@ function App() {
       const response = await fetch(MAKE_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: value, source: 'gurjot-command-centre', timestamp: new Date().toISOString() }) })
       setBridge(response.ok ? 'Make received command' : `Make returned ${response.status}`)
       log(`Make bridge response: ${response.status}`)
-    } catch {
+    } catch (err) {
       setBridge('Bridge needs server-side configuration')
       log('Browser could not reach the Make bridge.')
     }
